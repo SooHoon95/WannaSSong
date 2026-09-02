@@ -16,12 +16,12 @@ Next.js(Vercel) 클라이언트가 기대하는 **Socket.IO v4** 프로토콜과
 
 ## Vercel KV 키
 
-| 키 | 설명 |
-|----|------|
-| `wannasong:state` | `{ queue, history, lastRequestAt, fallbackCategory }` — `nowPlaying`은 저장하지 않음 |
-| `wannasong:feedback` | 건의 배열, 최대 1000건 |
-| `wannasong:fallback-pool` | `{ [category]: Track[] }` 동적 소스 누적 |
-| `wannasong:heartbeat` | `{ speakerOnline: boolean, at: ISO8601 }` — 30초마다 갱신 |
+| 키                        | 설명                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| `wannasong:state`         | `{ queue, history, lastRequestAt, fallbackCategory }` — `nowPlaying`은 저장하지 않음 |
+| `wannasong:feedback`      | 건의 배열, 최대 1000건                                                               |
+| `wannasong:fallback-pool` | `{ [category]: Track[] }` 동적 소스 누적                                             |
+| `wannasong:heartbeat`     | `{ speakerOnline: boolean, at: ISO8601 }` — 30초마다 갱신                            |
 
 `save()`: 상태 변경 후 **300ms 디바운스**로 `wannasong:state`에 JSON 저장.
 
@@ -29,19 +29,19 @@ Next.js(Vercel) 클라이언트가 기대하는 **Socket.IO v4** 프로토콜과
 
 ack 형식: `{ ok, error?, reason?, needKey?, cooldownRemainingMs?, item?, results? }`
 
-| 이벤트 | 권한 | 레이트 | 동작 |
-|--------|------|--------|------|
-| `identify` | 모두 | 20/min | `{ clientId, code }` → `me` emit |
-| `request` | 인증 | 10/min | `kind: url \| itunes \| video` 신청 → `enqueue` |
-| `remove` | 인증 | — | `{ id }` 본인 신청 취소, 쿨다운 복원 |
-| `speaker:claim` | 키(설정 시) | 10/min | 스피커 선출 |
-| `speaker:tick` | 스피커 | — | `{ position, duration, status }` → 다른 클라에 `tick` volatile |
-| `speaker:ended` | 스피커 | — | `{ videoId }` 일치 시 `advance('ended')` |
-| `speaker:error` | 스피커 | — | `{ videoId, code }` → failedVideoIds 추가, 1.5s 후 `advance('error')` |
-| `speaker:skip` | 스피커 | — | `advance('skipped')` |
-| `fallback:set` | 스피커 | — | `{ name }` 카테고리 변경 |
-| `speaker:release` | 스피커 | — | 역할 반납 |
-| `feedback` | 인증 | 3/10min | `{ text }` 2~500자 → KV `wannasong:feedback` |
+| 이벤트            | 권한        | 레이트  | 동작                                                                  |
+| ----------------- | ----------- | ------- | --------------------------------------------------------------------- |
+| `identify`        | 모두        | 20/min  | `{ clientId, code }` → `me` emit                                      |
+| `request`         | 인증        | 10/min  | `kind: url \| itunes \| video` 신청 → `enqueue`                       |
+| `remove`          | 인증        | —       | `{ id }` 본인 신청 취소, 쿨다운 복원                                  |
+| `speaker:claim`   | 키(설정 시) | 10/min  | 스피커 선출                                                           |
+| `speaker:tick`    | 스피커      | —       | `{ position, duration, status }` → 다른 클라에 `tick` volatile        |
+| `speaker:ended`   | 스피커      | —       | `{ videoId }` 일치 시 `advance('ended')`                              |
+| `speaker:error`   | 스피커      | —       | `{ videoId, code }` → failedVideoIds 추가, 1.5s 후 `advance('error')` |
+| `speaker:skip`    | 스피커      | —       | `advance('skipped')`                                                  |
+| `fallback:set`    | 스피커      | —       | `{ name }` 카테고리 변경                                              |
+| `speaker:release` | 스피커      | —       | 역할 반납                                                             |
+| `feedback`        | 인증        | 3/10min | `{ text }` 2~500자 → KV `wannasong:feedback`                          |
 
 > `suggest`, `ytsearch`는 **Next.js REST** (`POST /api/suggest`, `/api/ytsearch`)로 이전됨. Java에서 구현 불필요.
 
@@ -95,8 +95,8 @@ FALLBACK_PLAYLIST=
 COOLDOWN_SEC=300
 MAX_QUEUE=50
 MAX_PENDING_PER_USER=3
-KV_REST_API_URL=
-KV_REST_API_TOKEN=
+WANNASONG_REDIS_REST_KV_REST_API_URL=
+WANNASONG_REDIS_REST_KV_REST_API_TOKEN=
 ```
 
 ## HTTP (선택)

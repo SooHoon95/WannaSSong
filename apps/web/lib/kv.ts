@@ -1,8 +1,21 @@
-import { kv } from '@vercel/kv';
-import { KV_KEYS, type FeedbackItem, type Heartbeat } from '@wannasong/contract';
+import { createClient } from "@vercel/kv";
+
+import {
+  KV_KEYS,
+  type FeedbackItem,
+  type Heartbeat,
+} from "@wannasong/contract";
+
+const kv = createClient({
+  url: process.env.WANNASONG_REDIS_REST_KV_REST_API_URL!,
+  token: process.env.WANNASONG_REDIS_REST_KV_REST_API_TOKEN!,
+});
 
 function kvConfigured() {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+  return Boolean(
+    process.env.WANNASONG_REDIS_REST_KV_REST_API_URL &&
+      process.env.WANNASONG_REDIS_REST_KV_REST_API_TOKEN
+  );
 }
 
 export async function getFeedback(): Promise<FeedbackItem[]> {

@@ -121,8 +121,8 @@ YouTube IFrame API: `next/script`로 동적 로드. 스피커 전용 Client Comp
 
 | 키                                                  | 용도                                                       | 비고                               |
 | --------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------- |
-| `KV_REST_API_URL`                                   | Vercel KV                                                  | Vercel 연동 시 자동                |
-| `KV_REST_API_TOKEN`                                 | Vercel KV                                                  | Vercel 연동 시 자동                |
+| `WANNASONG_REDIS_REST_KV_REST_API_URL`              | Vercel KV                                                  | Vercel 연동 시 자동                |
+| `WANNASONG_REDIS_REST_KV_REST_API_TOKEN`            | Vercel KV                                                  | Vercel 연동 시 자동                |
 | `NEXT_PUBLIC_REALTIME_URL`                          | Java Socket.IO URL                                         | 예: `https://realtime.example.com` |
 | `PUBLIC_URL`                                        | QR·공유                                                    | Vercel 배포 URL                    |
 | `YT_API_KEY`                                        | ytsearch API                                               | 없으면 검색 탭 숨김                |
