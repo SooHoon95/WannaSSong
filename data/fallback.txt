@@ -1,0 +1,32 @@
+# 신청곡이 없을 때 자동 재생할 목록. # 으로 시작하면 주석.
+#
+# [카테고리 이름] 으로 섹션을 나누면 스피커 기기에서 분위기를 골라 바꿀 수 있습니다.
+# 각 줄은 넷 중 하나:
+#   https://www.youtube.com/watch?v=...   영상 링크 또는 11자리 ID (API 키 불필요)
+#   chart:KR                              그 나라 인기 음악 50곡, 날마다 갱신 (YT_API_KEY 필요, 1유닛)
+#   search:lofi hip hop                   검색어로 후보 50곡, 하루 1회 갱신 (YT_API_KEY 필요, 100유닛)
+#   playlist:PLxxxxxxxxxxxx               YouTube 재생목록 최대 200곡 (YT_API_KEY 필요, 1~4유닛)
+#
+# chart/search/playlist 로 모은 곡은 data/fallback-pool.json 에 누적되어 카테고리당 최대 500곡까지 불어납니다.
+# 임베드가 허용된 영상만 재생되며, 재생 실패한 영상은 자동으로 건너뜁니다.
+# 24시간 라이브 스트림은 임베드가 막히는 경우가 많아 권장하지 않습니다.
+
+[인기]
+chart:KR
+search:최신 인기가요 2026
+
+[신나는]
+search:upbeat pop hits
+search:NCS release
+# 키 없이도 동작하는 예시 (NCS, 저작권 프리)
+https://www.youtube.com/watch?v=TW9d8vYrVFQ
+https://www.youtube.com/watch?v=K4DyBUG242c
+https://www.youtube.com/watch?v=jK2aIUmmdP4
+
+[집중]
+search:lofi hip hop beats to study
+search:피아노 뉴에이지 연주곡
+
+[재즈]
+search:jazz cafe playlist
+search:smooth jazz instrumental
