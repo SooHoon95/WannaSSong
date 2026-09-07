@@ -12,11 +12,11 @@ Next.js(Vercel) + Java 실시간 서버 + Vercel KV로 재구현한 WannaSong입
 ## 로컬 개발
 
 ```bash
-npm install
+pnpm install
 cp apps/web/.env.example apps/web/.env.local
 # .env.local 값 채우기 (KV·REALTIME_URL 등)
 
-npm run dev          # http://localhost:3000
+pnpm dev          # http://localhost:3000
 ```
 
 Java realtime 서버(`NEXT_PUBLIC_REALTIME_URL`) 없이도 UI·REST API는 동작합니다. 대기열·재생은 Java 연결 후 사용 가능합니다.
@@ -45,13 +45,13 @@ Java realtime 서버(`NEXT_PUBLIC_REALTIME_URL`) 없이도 UI·REST API는 동�
 
 ```bash
 # 터미널 1
-npm run dev
+pnpm dev
 
 # 터미널 2 — REST API
-npm run test:api
+pnpm test:api
 
 # Java realtime 준비 후
-URL=https://realtime.example.com npm test
+URL=https://realtime.example.com pnpm test
 ```
 
 ## 라이선스

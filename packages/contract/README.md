@@ -32,7 +32,7 @@ ack 형식: `{ ok, error?, reason?, needKey?, cooldownRemainingMs?, item?, resul
 | 이벤트            | 권한        | 레이트  | 동작                                                                  |
 | ----------------- | ----------- | ------- | --------------------------------------------------------------------- |
 | `identify`        | 모두        | 20/min  | `{ clientId, code }` → `me` emit                                      |
-| `request`         | 인증        | 10/min  | `kind: url \| itunes \| video` 신청 → `enqueue`                       |
+| `request`         | 인증        | 10/min  | `kind: itunes \| video` 신청 → `enqueue`                              |
 | `remove`          | 인증        | —       | `{ id }` 본인 신청 취소, 쿨다운 복원                                  |
 | `speaker:claim`   | 키(설정 시) | 10/min  | 스피커 선출                                                           |
 | `speaker:tick`    | 스피커      | —       | `{ position, duration, status }` → 다른 클라에 `tick` volatile        |
@@ -112,7 +112,7 @@ WANNASONG_REDIS_REST_KV_REST_API_TOKEN=
 루트에서 Java 서버 기동 후:
 
 ```bash
-URL=https://realtime.example.com npm test
+URL=https://realtime.example.com pnpm test
 ```
 
 원본 [`test/security.test.mjs`](../../test/security.test.mjs)와 동일 시나리오 (suggest/ytsearch 소켓 테스트 제외).

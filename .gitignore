@@ -1,6 +1,9 @@
 node_modules/
+.pnpm-store/
 .next/
 .env
 .env.local
 *.log
 .DS_Store
+
+

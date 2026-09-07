@@ -90,7 +90,8 @@ WannaSong-next/
 │   ├── err-messages.ts          # ERR_MSG 한국어表
 │   └── README.md                # Java 구현 가이드 (상세)
 ├── data/fallback.txt            # 기존 파일 복사
-├── package.json                 # npm workspaces
+├── package.json                 # pnpm workspaces
+├── pnpm-workspace.yaml
 └── README.md                    # 로컬 dev·배포·Java 연동
 ```
 
@@ -156,7 +157,7 @@ env에 없는 값은 `.env.example`에 빈 문자열/placeholder로 두고 READM
 
 ```bash
 # 터미널 1: Next.js
-cd apps/web && npm run dev          # :3000
+cd apps/web && pnpm dev          # :3000
 
 # 터미널 2: Java realtime (사용자 구현 후)
 # 또는 개발용으로 packages/contract 기준 mock/stub

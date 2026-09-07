@@ -1,6 +1,6 @@
 // Java realtime 서버 보안·권한 확인. suggest/ytsearch는 Next.js REST로 이전됨.
 //   ACCESS_CODE=secret SPEAKER_KEY=spk PORT=3001 COOLDOWN_SEC=0 MAX_PENDING_PER_USER=1 (Java 서버)
-//   URL=http://localhost:3001 npm test
+//   URL=http://localhost:3001 pnpm test
 import { io } from 'socket.io-client';
 
 const URL = process.env.URL || 'http://localhost:3001';
@@ -15,7 +15,8 @@ await once(s, 'connect');
 s.emit('identify', { clientId: 't1' });
 let me = await once(s, 'me');
 check('코드 없으면 인증 실패', me.ok === false && me.authRequired === true, JSON.stringify(me));
-let r = await emit(s, 'request', { kind: 'url', url: 'https://www.youtube.com/watch?v=TW9d8vYrVFQ' });
+const video = (videoId, title) => ({ kind: 'video', videoId, title, author: 'test' });
+let r = await emit(s, 'request', video('TW9d8vYrVFQ', 'Track A'));
 check('미인증 신청 거부', r.ok === false && /입장 코드/.test(r.error), r.error);
 
 s.emit('identify', { clientId: 't1', code: 'wrong' });
@@ -25,12 +26,12 @@ check('틀린 코드 거부', me.ok === false);
 s.emit('identify', { clientId: 't1', code: 'secret' });
 me = await once(s, 'me');
 check('맞는 코드 인증', me.ok === true);
-r = await emit(s, 'request', { kind: 'url', url: 'https://www.youtube.com/watch?v=TW9d8vYrVFQ' });
+r = await emit(s, 'request', video('TW9d8vYrVFQ', 'Track A'));
 check('인증 후 신청 성공', r.ok === true, r.error || r.item?.title);
 
-r = await emit(s, 'request', { kind: 'url', url: 'https://www.youtube.com/watch?v=K4DyBUG242c' });
+r = await emit(s, 'request', video('K4DyBUG242c', 'Track B'));
 check('두 번째 신청 성공', r.ok === true, r.error || r.item?.title);
-r = await emit(s, 'request', { kind: 'url', url: 'https://www.youtube.com/watch?v=jK2aIUmmdP4' });
+r = await emit(s, 'request', video('jK2aIUmmdP4', 'Track C'));
 check('대기 상한 → 세 번째 신청 거부', r.ok === false && /이미.*곡/.test(r.error), r.error);
 
 r = await emit(s, 'speaker:claim', {});

@@ -2,15 +2,12 @@
   "name": "wannasong-next",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@10.17.1",
   "scripts": {
-    "dev": "npm run dev -w web",
-    "build": "npm run build -w web",
-    "start": "npm run start -w web",
-    "lint": "npm run lint -w web",
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "lint": "pnpm --filter web lint",
     "test": "node test/security.test.mjs",
     "test:api": "node test/api.test.mjs"
   },

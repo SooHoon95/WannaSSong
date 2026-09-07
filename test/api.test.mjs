@@ -1,4 +1,4 @@
-// REST API smoke test. dev 서버가 떠 있어야 함: npm run dev
+// REST API smoke test. dev 서버가 떠 있어야 함: pnpm dev
 const BASE = process.env.BASE || 'http://localhost:3000';
 const results = [];
 const check = (name, cond, extra = '') => results.push([cond ? 'PASS' : 'FAIL', name, extra]);

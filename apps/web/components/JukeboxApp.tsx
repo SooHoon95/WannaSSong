@@ -22,7 +22,7 @@ import {
 
 const STALL_MS = 45_000;
 
-type Tab = 'song' | 'yt' | 'url';
+type Tab = 'song' | 'yt';
 type Role = 'viewer' | 'speaker';
 
 export default function JukeboxApp() {
@@ -44,7 +44,6 @@ export default function JukeboxApp() {
   const [suggestResults, setSuggestResults] = useState<ItunesResult[]>([]);
   const [ytq, setYtq] = useState('');
   const [ytResults, setYtResults] = useState<Track[]>([]);
-  const [url, setUrl] = useState('');
   const [ytLoading, setYtLoading] = useState(false);
 
   const playerRef = useRef<YT.Player | null>(null);
@@ -235,7 +234,6 @@ export default function JukeboxApp() {
         setCooldownUntil(Date.now() + (res.cooldownRemainingMs || 0));
         setSuggestResults([]);
         setQ('');
-        setUrl('');
         setYtResults([]);
       } else {
         toast(res.error || '신청 실패', true);
@@ -529,7 +527,6 @@ export default function JukeboxApp() {
                 {searchEnabled && (
                   <button type="button" className={tab === 'yt' ? 'active' : ''} onClick={() => setTab('yt')}>YouTube 검색</button>
                 )}
-                <button type="button" className={tab === 'url' ? 'active' : ''} onClick={() => setTab('url')}>링크</button>
               </div>
               {tab === 'song' && (
                 <div>
@@ -545,9 +542,17 @@ export default function JukeboxApp() {
                         <button type="button" className="primary" onClick={() => request({ kind: 'itunes', artist: r.artist, title: r.title })}>신청</button>
                       </li>
                     ))}
-                    {q && !suggestResults.length && <li className="empty" style={{ display: 'block' }}>결과 없음 — YouTube 검색 탭을 써 보세요</li>}
+                    {q && !suggestResults.length && (
+                      <li className="empty" style={{ display: 'block' }}>
+                        {searchEnabled ? '결과 없음 — YouTube 검색 탭을 써 보세요' : '결과 없음'}
+                      </li>
+                    )}
                   </ul>
-                  <p className="hint">{searchEnabled ? '곡 후보는 iTunes에서 무료로 찾고, 신청을 누를 때만 YouTube에서 1번 검색합니다.' : '서버에 YouTube API 키가 없어 검색이 꺼져 있습니다. 링크 탭을 이용하세요.'}</p>
+                  <p className="hint">
+                    {searchEnabled
+                      ? '곡 후보는 iTunes에서 무료로 찾고, 신청을 누를 때만 YouTube에서 1번 검색합니다.'
+                      : '서버에 YouTube API 키가 없어 신청·YouTube 검색을 쓸 수 없습니다.'}
+                  </p>
                 </div>
               )}
               {tab === 'yt' && searchEnabled && (
@@ -570,15 +575,6 @@ export default function JukeboxApp() {
                     {ytq && !ytResults.length && !ytLoading && <li className="empty" style={{ display: 'block' }}>결과 없음</li>}
                   </ul>
                   <p className="hint">하루 검색 한도가 있어요(기본 100회). 곡 검색에서 안 나올 때만 써 주세요.</p>
-                </div>
-              )}
-              {tab === 'url' && (
-                <div>
-                  <div className="row">
-                    <input placeholder="https://www.youtube.com/watch?v=…" value={url} onChange={(e) => setUrl(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && url.trim() && request({ kind: 'url', url: url.trim() })} />
-                    <button type="button" className="primary" onClick={() => url.trim() && request({ kind: 'url', url: url.trim() })}>신청</button>
-                  </div>
-                  <p className="hint">API 키·검색 한도와 무관하게 항상 됩니다.</p>
                 </div>
               )}
             </div>
