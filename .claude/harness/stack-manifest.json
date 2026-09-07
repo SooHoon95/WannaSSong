@@ -1,0 +1,103 @@
+{
+  "$comment": "WannaSong 스택 지문(루트 + 워크스페이스별). harness-check.mjs 가 생성·비교한다. 손으로 고치지 말고 하네스를 새 스택에 맞게 갱신한 뒤 --update 로 승인할 것. refIgnore 만 수기 편집.",
+  "updatedAt": "2026-09-07T06:43:05.336Z",
+  "stack": {
+    "packageManager": "pnpm",
+    "runtime": "node (미고정)",
+    "moduleType": "commonjs",
+    "packageManagerPinned": "pnpm@10.17.1",
+    "workspacesDeclared": [
+      "apps/*",
+      "packages/*"
+    ],
+    "rootDeps": [],
+    "rootDevDeps": [
+      "socket.io-client"
+    ],
+    "rootScripts": {
+      "dev": "pnpm --filter web dev",
+      "build": "pnpm --filter web build",
+      "start": "pnpm --filter web start",
+      "lint": "pnpm --filter web lint",
+      "test": "node test/security.test.mjs",
+      "test:api": "node test/api.test.mjs"
+    },
+    "deploy": [],
+    "dirs": [
+      "apps",
+      "data",
+      "docs",
+      "packages",
+      "tasks",
+      "test"
+    ],
+    "envKeys": [],
+    "workspaces": {
+      "apps/web": {
+        "kind": "node",
+        "name": "web",
+        "language": "typescript",
+        "moduleType": "commonjs",
+        "frameworks": [
+          "@vercel/kv",
+          "eslint",
+          "next",
+          "react",
+          "react-dom",
+          "socket.io-client",
+          "typescript"
+        ],
+        "deps": [
+          "@vercel/kv",
+          "@wannasong/contract",
+          "next",
+          "qrcode.react",
+          "react",
+          "react-dom",
+          "socket.io-client"
+        ],
+        "devDeps": [
+          "@types/node",
+          "@types/react",
+          "@types/react-dom",
+          "eslint",
+          "eslint-config-next",
+          "typescript"
+        ],
+        "scripts": {
+          "dev": "next dev",
+          "build": "next build",
+          "start": "next start",
+          "lint": "eslint"
+        },
+        "deploy": [
+          "vercel.json"
+        ],
+        "envKeys": [
+          "NEXT_PUBLIC_REALTIME_URL",
+          "PORT",
+          "PUBLIC_URL",
+          "SPEAKER_KEY",
+          "WANNASONG_REDIS_REST_KV_REST_API_TOKEN",
+          "WANNASONG_REDIS_REST_KV_REST_API_URL",
+          "YT_API_KEY"
+        ]
+      },
+      "packages/contract": {
+        "kind": "node",
+        "name": "@wannasong/contract",
+        "language": "typescript",
+        "moduleType": "module",
+        "frameworks": [],
+        "deps": [],
+        "devDeps": [],
+        "scripts": {},
+        "deploy": [],
+        "envKeys": []
+      }
+    }
+  },
+  "refIgnore": [
+    "AskUserQuestion"
+  ]
+}

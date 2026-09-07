@@ -7,3 +7,6 @@ node_modules/
 .DS_Store
 
 
+
+# 하네스/OMC 로컬 상태 (harness-check·skill-curator 상태 파일)
+.omc/

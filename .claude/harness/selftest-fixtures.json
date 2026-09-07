@@ -1,0 +1,19 @@
+{
+  "$comment": "harness-check.mjs --selftest 가 임시 복사본에 주입하는 결함 문자열. 검사기 코퍼스에서 제외된다(검사기 소스에 넣으면 '코드에 존재'로 오판되기 때문).",
+  "staleRefs": "\n\n`apps/web/lib/ghost-file.ts` `GHOST_ENV_KEY` `ghostSymbolName()` `/api/ghost` `ghost:event`\n",
+  "staleRefKinds": [
+    "경로 없음",
+    "env 키/상수 미발견",
+    "심볼 미발견",
+    "커맨드/라우트 없음",
+    "이벤트/키 미발견"
+  ],
+  "existingRoutes": "\n\n`/api/health` `/feedback` `/player`\n",
+  "ghostSkill": "---\nname: wannasong-phantom\ndescription: x\n---\n",
+  "gradle": "plugins { id \"org.springframework.boot\" version \"3.3.0\" }\n",
+  "goMod": "module api\n",
+  "dockerfile": "FROM node:22-alpine\n",
+  "envLine": "\nSELFTEST_NEW_KEY=\n",
+  "npmCmd": "\n\n```bash\nnpm run dev\n```\n",
+  "externalDoc": "# 스펙\n\n`apps/web/lib/ghost-file.ts` 를 이식한다. 백엔드는 `ghostBackendSymbol()` 과 `GHOST_BACKEND_ENV` 를 쓴다.\n"
+}

@@ -57,3 +57,12 @@ URL=https://realtime.example.com pnpm test
 ## 라이선스
 
 MIT
+
+## 개발 하네스 (Claude Code)
+
+`CLAUDE.md`가 작업 원칙, `.claude/skills/`가 스택·구조·계약·컨벤션의 단일 진실 소스입니다. `.claude/harness/harness-check.mjs`가 저장소의 스택 지문(워크스페이스별)과 문서 참조를 검사하며, 스택·구조가 바뀌면 훅이 드리프트를 알려 하네스를 같은 작업에서 갱신하게 합니다.
+
+```bash
+node .claude/harness/harness-check.mjs            # 하네스 정합성 리포트
+node .claude/harness/harness-check.mjs --selftest # 검사기 자기 검증
+```
